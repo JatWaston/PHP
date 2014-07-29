@@ -1,14 +1,19 @@
 <?php
-echo json_encode($_FILES['uploader']);
-
-$target_path = './upload/' . basename($_FILES['uploader']['name']);
-
-if (move_uploaded_file($_FILES['uploader']['tmp_name'], $target_path))
-{
-	echo json_encode(array('result' => 0));
-}
-else
-{
-	echo json_encode(array('result' => -1));
-}
+// 	echo $_POST['submit'] . "<br />";
+	if (isset($_POST['submit'])) {
+		switch ($_POST['submit'])
+		{
+			case "login":
+				echo "login..." . "<br />";
+				break;
+			case "register":
+				echo "register..." . "<br />";
+				break;
+		}
+		echo $_POST['account'] . "<br />";
+		echo $_POST['pwd'] . "<br />";
+	}
+	else {
+		echo "submit is no come.";
+	}
 ?>
