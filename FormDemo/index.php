@@ -10,6 +10,9 @@
 	</head>
 	<body>
 		<?php 
+		require_once '../communalClass/class_db.php';
+		require_once '../communalClass/global.php';
+		$db = new class_dboperation(DBHOST,DBUSER,DBPWD,DBNAME,'GB2312');
 		//print_r($_SERVER);
 		$name = $email = $website = $comment = $gender = "";
 		$nameError = $emailError = $websiteError = $genderError = "";
@@ -47,6 +50,19 @@
 			}
 			$comment = test_input($_POST['comment']);
 			
+			$date = date("Y-m-d h:m:s");
+			if ($gender == 'female') {
+				$sql = "INSERT INTO comment (name,email,website,comment,sex,commentDate) VALUES ('$name','$email','$website','$comment','1','$date')";
+			}
+			else
+			{
+				$sql = "INSERT INTO comment (name,email,website,comment,sex,commentDate) VALUES ('$name','$email','$website','$comment','0','$date')";
+			}
+			$res = $db->query($sql);
+			echo $res . "<br/>";
+			
+			
+			
 		}
 
 		function test_input($data)
@@ -62,7 +78,7 @@
 			<p><span class="error">*必填字段</span></p>
 			姓名：<input type="text" name="name" value="<?php echo $name;?>"><span class="error">*<?php echo $nameError;?></span><br/><br/>
 			电邮：<input type="text" name="email" value="<?php echo $email;?>"><span class="error">*<?php echo $emailError;?></span><br/><br/>
-			网址：<input type="text" name="url" value="<?php echo $website;?>"><span class="error">*<?php echo $websiteError;?></span><br/><br/>
+			网址：<input type="text" name="url" value="<?php echo $website;?>"><span class="error"><?php echo $websiteError;?></span><br/><br/>
 			评论：<textarea name="comment" rows="5" cols="40"><?php echo $comment;?></textarea><br/><br/>
 			性别：
 			<input type="radio" name="gender" <?php if(isset($gender) && $gender == "female") echo "checked";?> value="female">女性
