@@ -46,7 +46,7 @@
 			$website = test_input($_POST['url']);
 			if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%
 				=~_|]/i",$website)) {
-				$websiteError = "无效的 URL";
+				$websiteError = "无效的URL";
 			}
 			$comment = test_input($_POST['comment']);
 			
